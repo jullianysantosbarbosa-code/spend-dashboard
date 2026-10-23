@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spend dashboard</title>
+  <meta name="description" content="Explore procurement spend by supplier, month and department. Runs entirely in your browser.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="page">
+    <header class="masthead">
+      <div>
+        <h1>Spend dashboard</h1>
+        <p class="dataset" id="dataset-label">Loading data</p>
+      </div>
+      <div class="upload">
+        <label class="button" for="csv-input">Load your own CSV</label>
+        <input id="csv-input" class="visually-hidden" type="file" accept=".csv,text/csv">
+      </div>
+    </header>
+
+    <p id="message" class="message" role="alert" hidden></p>
+
+    <main>
+      <form class="filters" aria-label="Filters" onsubmit="return false">
+        <div class="field">
+          <label for="filter-year">Year</label>
+          <select id="filter-year"></select>
+        </div>
+        <div class="field">
+          <label for="filter-department">Department</label>
+          <select id="filter-department"></select>
+        </div>
+        <div class="field">
+          <label for="filter-category">Category</label>
+          <select id="filter-category"></select>
+        </div>
+        <button type="button" class="link-button" id="reset-filters">Reset filters</button>
+      </form>
+
+      <section class="summary" aria-labelledby="summary-heading">
+        <h2 id="summary-heading" class="visually-hidden">Summary</h2>
+        <p class="headline" id="headline" aria-live="polite"></p>
+        <dl class="facts" id="facts"></dl>
+      </section>
+
+      <div class="charts">
+        <section aria-labelledby="suppliers-heading">
+          <h2 id="suppliers-heading">Where the money goes</h2>
+          <div id="suppliers"></div>
+        </section>
+
+        <section aria-labelledby="monthly-heading">
+          <h2 id="monthly-heading">Spend over time</h2>
+          <div id="monthly"></div>
+        </section>
+      </div>
+
+      <section aria-labelledby="table-heading">
+        <h2 id="table-heading">Largest procurements</h2>
+        <div class="table-wrap" role="region" aria-labelledby="table-heading" tabindex="0">
+          <table id="table"></table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>The sample data is synthetic. Load a CSV with the columns <code>id, date, department, supplier, category, amount_eur, processing_days</code>, such as one created by ProcureIQ. Files are read in your browser and never uploaded.</p>
+    </footer>
+  </div>
+
+  <script src="data/sample-data.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
